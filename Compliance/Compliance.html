@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliance Legal México | MYA Consultores - Diagnóstico Gratuito</title>
+  <meta name="description" content="Descubre qué es el compliance legal, su importancia en México y evalúa el riesgo normativo de tu empresa con nuestro test gratuito.">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #0ea5e9;
+      --accent: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --gray: #475569;
+      --border: #cbd5e1;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--primary); background: var(--light); }
+    
+    header { background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); border-bottom: 2px solid var(--secondary); }
+    nav { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+    .nav-links { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .nav-links a { color: var(--gray); text-decoration: none; font-weight: 500; transition: 0.2s; }
+    .nav-links a:hover { color: var(--secondary); }
+
+    .hero { background: linear-gradient(135deg, var(--primary), #1e293b); color: var(--white); padding: 4rem 1.5rem; text-align: center; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2; }
+    .hero p { font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem; opacity: 0.95; }
+    .btn { display: inline-block; padding: 0.9rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; font-size: 1rem; transition: 0.2s; }
+    .btn-primary { background: var(--secondary); color: var(--white); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14,165,233,0.4); }
+    .btn-accent { background: var(--accent); color: var(--white); }
+    .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(34,197,94,0.4); }
+    .btn-outline { background: transparent; border: 2px solid white; color: white; }
+    .btn-outline:hover { background: white; color: var(--primary); }
+
+    section { max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .section-title { text-align: center; margin-bottom: 2.5rem; }
+    .section-title h2 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .section-title p { color: var(--gray); max-width: 600px; margin: 0 auto; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .card { background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .card h3 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .card-icon { width: 50px; height: 50px; background: var(--light); border-radius: 8px; display: grid; place-items: center; margin-bottom: 1rem; font-size: 1.5rem; }
+
+    .stats { background: var(--light); border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center; margin: 2rem 0; }
+    .stat-number { font-size: 2rem; font-weight: 700; color: var(--secondary); display: block; }
+    .stat-label { color: var(--gray); font-size: 0.9rem; }
+
+    .table-container { overflow-x: auto; margin: 1.5rem 0; }
+    table { width: 100%; border-collapse: collapse; background: var(--white); }
+    th { background: var(--primary); color: white; padding: 1rem; text-align: left; }
+    td { padding: 1rem; border-bottom: 1px solid var(--border); }
+    tr:hover { background: var(--light); }
+
+    .steps { counter-reset: step; }
+    .step { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+    .step-number { min-width: 36px; height: 36px; background: var(--secondary); color: white; border-radius: 50%; display: grid; place-items: center; font-weight: 600; flex-shrink: 0; }
+    .step h4 { color: var(--primary); margin-bottom: 0.3rem; }
+
+    #test-compliance { background: var(--white); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow); max-width: 800px; margin: 3rem auto; }
+    .quiz-start { text-align: center; padding: 2rem 1rem; }
+    .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 1.5rem; }
+    .progress-fill { height: 100%; background: var(--secondary); width: 0%; transition: width 0.3s ease; }
+    .quiz-option { padding: 1rem; margin: 0.8rem 0; text-align: left; border: 2px solid var(--border); border-radius: 8px; background: var(--white); cursor: pointer; transition: all 0.2s; font-size: 0.95rem; width: 100%; }
+    .quiz-option:hover { border-color: var(--secondary); background: #f0f9ff; }
+    .quiz-option.selected { border-color: var(--secondary); background: #e0f2fe; }
+    .result-box { padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; text-align: left; }
+    .result-low { background: #dcfce7; border-left: 4px solid var(--accent); }
+    .result-med { background: #fef3c7; border-left: 4px solid var(--warning); }
+    .result-high { background: #fee2e2; border-left: 4px solid var(--danger); }
+    .lead-form { background: var(--light); padding: 1.5rem; border-radius: 10px; margin-top: 1.5rem; border: 2px solid var(--secondary); }
+    .lead-form input, .lead-form button { width: 100%; padding: 0.8rem; margin: 0.4rem 0; border-radius: 6px; border: 1px solid var(--border); font-size: 1rem; }
+    .lead-form button { background: var(--accent); color: white; font-weight: 600; cursor: pointer; border: none; margin-top: 0.8rem; }
+    .success-msg { color: var(--accent); text-align: center; margin-top: 1rem; font-weight: 600; display: none; }
+
+    footer { background: var(--primary); color: var(--light); padding: 2rem 1.5rem; text-align: center; margin-top: 4rem; }
+    footer a { color: var(--secondary); text-decoration: none; }
+    footer p { margin: 0.5rem 0; opacity: 0.9; font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 3rem 1rem; }
+      .grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; text-align: center; margin: 0.3rem 0 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">
+  	<img src="LOGO.jpg" alt="Logo MYA Consultores" style="height: 36px; width: auto;">
+  	MYA Consultores
+	</div>
+      <ul class="nav-links">
+        <li><a href="#que-es">¿Qué es?</a></li>
+        <li><a href="#importancia">Importancia</a></li>
+        <li><a href="#normativa">Normativa</a></li>
+        <li><a href="#test-compliance">Test Gratuito</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Compliance Legal en México</h1>
+    <p>Transforma el cumplimiento normativo en ventaja competitiva para tu empresa. Evita sanciones millonarias y construye una cultura de integridad.</p>
+    <div>
+      <a href="#test-compliance" class="btn btn-primary">🔍 Hacer Test de Riesgo</a>
+      <a href="#que-es" class="btn btn-outline">📚 Aprender Más</a>
+    </div>
+  </section>
+
+  <section id="que-es">
+    <div class="section-title">
+      <h2>¿Qué es el Compliance Legal?</h2>
+      <p>El sistema que protege y potencia a tu empresa en el entorno regulatorio mexicano</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Definición</h3>
+        <p>Conjunto de procesos, políticas y controles que aseguran que una organización opere conforme a leyes, reglamentos, estándares éticos y buenas prácticas aplicables en México.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Componentes Clave</h3>
+        <ul style="padding-left: 1.2rem;">
+          <li>Evaluación de riesgos normativos</li>
+          <li>Políticas y códigos de conducta</li>
+          <li>Capacitación y comunicación</li>
+          <li>Monitoreo y auditoría interna</li>
+          <li>Canal de denuncias éticas</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">👤</div>
+        <h3>Compliance Officer</h3>
+        <p>Profesional responsable de diseñar, implementar y supervisar el programa de cumplimiento, actuando como puente entre la dirección, operaciones y autoridades.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="importancia" style="background: var(--light);">
+    <div class="section-title">
+      <h2>¿Por qué es Estratégico en México?</h2>
+      <p>El contexto regulatorio mexicano hace del compliance una necesidad, no una opción</p>
+    </div>
+    <div class="stats">
+      <div><span class="stat-number">$50M+</span><span class="stat-label">Multa máxima INAI por violación a datos personales</span></div>
+      <div><span class="stat-number">98%</span><span class="stat-label">Empresas auditadas reportan hallazgos corregibles</span></div>
+      <div><span class="stat-number">3x</span><span class="stat-label">Mayor confianza de inversionistas</span></div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>📈 Entorno Normativo Dinámico</h3>
+        <p>México ha fortalecido su marco regulatorio: reforma laboral 2019, Ley Fintech 2018, LFPDPPP, y mayor fiscalización de PROFECO, STPS y CNBV.</p>
+      </div>
+      <div class="card">
+        <h3>⚖️ Responsabilidad Penal</h3>
+        <p>El Art. 11 bis del CPF establece que las empresas pueden ser penalmente responsables por corrupción, lavado de dinero o contaminación.</p>
+      </div>
+      <div class="card">
+        <h3>🌍 Exigencias Globales</h3>
+        <p>Empresas que exportan o trabajan con multinacionales deben cumplir estándares internacionales (FCPA, ISO 37301).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="beneficios">
+    <div class="section-title">
+      <h2>Beneficios Tangibles</h2>
+      <p>El compliance no es un gasto: es una inversión con retorno medible</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="card-icon">🛡️</div><h3>Prevención de Sanciones</h3><p>Evita multas de hasta el 5% de ingresos anuales, clausuras o inhabilitación para contratar con el gobierno.</p></div>
+      <div class="card"><div class="card-icon">⭐</div><h3>Reputación</h3><p>Una cultura de integridad atrae clientes leales, talento de calidad y socios estratégicos.</p></div>
+      <div class="card"><div class="card-icon">💼</div><h3>Acceso a Mercados</h3><p>Certificaciones como ISO 37301 abren puertas a licitaciones públicas y cadenas globales.</p></div>
+      <div class="card"><div class="card-icon">⚡</div><h3>Eficiencia</h3><p>Procesos documentados y controles reducen errores y tiempos de respuesta ante auditorías.</p></div>
+      <div class="card"><div class="card-icon">🤝</div><h3>Relaciones Laborales</h3><p>Cumplir con la LFT previene conflictos, demandas y mejora el clima organizacional.</p></div>
+      <div class="card"><div class="card-icon">🔐</div><h3>Protección de Activos</h3><p>Políticas de ciberseguridad y manejo de datos protegen tu información sensible.</p></div>
+    </div>
+  </section>
+
+  <section id="normativa" style="background: var(--light);">
+    <div class="section-title">
+      <h2>Marco Normativo Esencial</h2>
+      <p>Regulaciones que toda empresa debe considerar</p>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead><tr><th>Normativa</th><th>Ámbito</th><th>Riesgo Principal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>LFPDPPP</strong><br><small>Protección de Datos Personales</small></td><td>Tratamiento de datos personales</td><td>Multas hasta $50M MXN</td></tr>
+          <tr><td><strong>LFT + NOM-STPS</strong><br><small>Ley Federal del Trabajo</small></td><td>Relaciones laborales, seguridad</td><td>Clausuras, multas, demandas</td></tr>
+          <tr><td><strong>CPF Art. 11 bis</strong><br><small>Código Penal Federal</small></td><td>Responsabilidad penal empresas</td><td>Sanciones penales, inhabilitación</td></tr>
+          <tr><td><strong>LFPC</strong><br><small>Protección al Consumidor</small></td><td>Publicidad, contratos</td><td>Multas PROFECO, daño a marca</td></tr>
+          <tr><td><strong>Ley Fintech</strong></td><td>Tecnologías financieras</td><td>Sanciones CNBV</td></tr>
+          <tr><td><strong>LGRA</strong></td><td>Contratación pública</td><td>Inhabilitación gobierno</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="implementacion">
+    <div class="section-title">
+      <h2>Cómo Implementar Compliance</h2>
+      <p>7 pasos prácticos para iniciar</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-number">1</div><div><h4>Diagnóstico de Riesgos</h4><p>Identifica leyes aplicables a tu giro, tamaño y ubicación. Prioriza por impacto.</p></div></div>
+      <div class="step"><div class="step-number">2</div><div><h4>Compromiso Directivo</h4><p>El compliance debe impulsarse desde la Alta Dirección con recursos y autoridad.</p></div></div>
+      <div class="step"><div class="step-number">3</div><div><h4>Políticas y Controles</h4><p>Elabora códigos de conducta, manuales y mecanismos de control.</p></div></div>
+      <div class="step"><div class="step-number">4</div><div><h4>Capacitación</h4><p>Tu equipo debe conocer las reglas. Usa casos prácticos y recordatorios.</p></div></div>
+      <div class="step"><div class="step-number">5</div><div><h4>Canal de Denuncias</h4><p>Medio confidencial y seguro para reportar irregularidades sin represalias.</p></div></div>
+      <div class="step"><div class="step-number">6</div><div><h4>Monitoreo</h4><p>Auditorías internas y medición de indicadores de cumplimiento.</p></div></div>
+      <div class="step"><div class="step-number">7</div><div><h4>Documentar Todo</h4><p>Guarda evidencias de políticas, capacitaciones y acciones correctivas.</p></div></div>
+    </div>
+  </section>
+
+  <!-- TEST INTERACTIVO -->
+  <section id="test-compliance">
+    <div class="section-title">
+      <h2>🔍 Test de Riesgo Normativo</h2>
+      <p>Evalúa el nivel de cumplimiento de tu empresa en 3 minutos. Resultados inmediatos + reporte descargable.</p>
+    </div>
+
+    <div id="quiz-start" class="quiz-start">
+      <h3>Diagnóstico Express de Compliance</h3>
+      <p>• 10 preguntas • 3 minutos • 100% confidencial<br>• Reporte personalizado con recomendaciones</p>
+      <button id="start-quiz" class="btn btn-primary">🚀 Comenzar Test</button>
+    </div>
+
+    <div id="quiz-questions" style="display: none;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--gray); font-size: 0.9rem;">
+        <span id="question-progress">Pregunta 1 de 10</span>
+        <span id="question-category">Riesgo Legal</span>
+      </div>
+      <div class="progress-bar"><div id="progress-bar" class="progress-fill"></div></div>
+      <h3 id="question-text" style="color: var(--primary); margin-bottom: 1.5rem;"></h3>
+      <div id="options-container"></div>
+      <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+        <button id="prev-btn" class="btn" style="background: var(--light); color: var(--gray); border: 1px solid var(--border); display: none;">← Anterior</button>
+        <button id="next-btn" class="btn btn-primary" style="margin-left: auto;">Siguiente →</button>
+        <button id="finish-btn" class="btn btn-accent" style="margin-left: auto; display: none;">Ver Resultados ✨</button>
+      </div>
+    </div>
+
+    <div id="quiz-results" style="display: none; text-align: center;">
+      <div id="result-icon" style="font-size: 3.5rem; margin-bottom: 1rem;"></div>
+      <h3 id="result-title" style="color: var(--primary); margin-bottom: 0.5rem;"></h3>
+      <p id="result-score" style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;"></p>
+      <p id="result-description" style="color: var(--gray); margin-bottom: 1.5rem;"></p>
+      <div id="result-recommendations" class="result-box"></div>
+      
+      <div id="lead-form" class="lead-form">
+        <h4>📩 Descarga tu diagnóstico completo</h4>
+        <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 1rem;">Ingresa tu correo para descargar el reporte personalizado con recomendaciones específicas.</p>
+        <form id="email-form">
+          <input type="text" id="lead-name" placeholder="Nombre completo" required>
+          <input type="email" id="lead-email" placeholder="Correo electrónico" required>
+          <input type="text" id="lead-company" placeholder="Nombre de tu empresa (opcional)">
+          <button type="submit" class="btn btn-accent" style="width:100%; margin-top:0.8rem;">📥 Descargar Reporte</button>
+        </form>
+        <p id="form-success" class="success-msg">✅ ¡Listo! Tu reporte se ha descargado.</p>
+      </div>
+      <button id="restart-quiz" class="btn" style="background: var(--light); color: var(--gray); border: 1px solid var(--border); margin-top: 1.5rem;">🔄 Hacer test de nuevo</button>
+    </div>
+  </section>
+
+  <footer id="contacto">
+    <p>© 2026 MYA Consultores Fiscales • Diagnóstico con fines informativos</p>
+    <p>¿Necesitas asesoría personalizada? 
+      <a href="mailto:beatriz.maya@myaconsultoresfiscales.com">beatriz.maya@myaconsultoresfiscales.com</a> | 
+      <a href="https://wa.me/5215579441612?text=Hola%2C%20realic%C3%A9%20el%20test%20de%20compliance%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+    </p>
+    <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">No compartimos tu información.</p>
+  </footer>
+
+  <script>
+    const questions = [
+      { cat: "Protección de Datos", q: "¿Tu empresa cuenta con Aviso de Privacidad actualizado y visible?", opts: [{t:"Sí, está publicado y actualizado", p:0}, {t:"Tenemos uno, pero no estamos seguros", p:5}, {t:"No tenemos o no sabemos qué es", p:10}] },
+      { cat: "Datos Sensibles", q: "¿Manejas datos sensibles (salud, biometría, opiniones, etc.)?", opts: [{t:"No, solo datos generales", p:0}, {t:"Sí, con medidas de seguridad", p:3}, {t:"Sí, y no estamos seguros de cumplir", p:10}] },
+      { cat: "Laboral", q: "¿Todos tus empleados tienen contrato firmado y registro IMSS desde el día 1?", opts: [{t:"Sí, 100% cumplimos", p:0}, {t:"La mayoría, pero hay pendientes", p:7}, {t:"No, usamos honorarios o sin registro", p:10}] },
+      { cat: "Seguridad e Higiene", q: "¿Tienes evaluación NOM-035 y sillas ergonómicas (Ley Silla)?", opts: [{t:"Sí, ambas implementadas", p:0}, {t:"Solo una de las dos", p:5}, {t:"No conocemos estas obligaciones", p:10}] },
+      { cat: "Telemarketing", q: "¿Verificas que los números NO estén en el REPEP de PROFECO?", opts: [{t:"Sí, antes de cada campaña", p:0}, {t:"Ocasionalmente", p:5}, {t:"No sabemos qué es el REPEP", p:10}] },
+      { cat: "Grabación", q: "¿Informas que la llamada se graba y pides consentimiento?", opts: [{t:"Sí, siempre al inicio", p:0}, {t:"A veces lo mencionamos", p:5}, {t:"No informamos", p:10}] },
+      { cat: "Fiscal", q: "¿Has recibido multas o requerimientos del SAT en los últimos 2 años?", opts: [{t:"No, estamos al corriente", p:0}, {t:"Sí, pero ya se resolvieron", p:4}, {t:"Sí, y aún tenemos pendientes", p:10}] },
+      { cat: "Consumidor", q: "¿Tienes políticas claras para quejas, garantías y devoluciones?", opts: [{t:"Sí, documentadas", p:0}, {t:"Las tenemos, pero no formalizadas", p:4}, {t:"No, caso por caso", p:10}] },
+      { cat: "Gobierno Corporativo", q: "¿Tienes Código de Ética o Canal de Denuncias?", opts: [{t:"Sí, ambos", p:0}, {t:"Solo uno", p:3}, {t:"Ninguno", p:10}] },
+      { cat: "Crecimiento", q: "¿Planeas expandirte, buscar inversión o trabajar con gobierno/corporativos?", opts: [{t:"Sí, en 12 meses", p:5}, {t:"Tal vez", p:2}, {t:"No", p:0}] }
+    ];
+
+    let currentQ = 0, userAns = [];
+    const startEl = document.getElementById('quiz-start');
+    const qEl = document.getElementById('quiz-questions');
+    const rEl = document.getElementById('quiz-results');
+    const qText = document.getElementById('question-text');
+    const qCat = document.getElementById('question-category');
+    const qProg = document.getElementById('question-progress');
+    const pBar = document.getElementById('progress-bar');
+    const optsBox = document.getElementById('options-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const finBtn = document.getElementById('finish-btn');
+
+    document.getElementById('start-quiz').addEventListener('click', () => { startEl.style.display='none'; qEl.style.display='block'; loadQ(); });
+
+    function loadQ() {
+      const q = questions[currentQ];
+      qText.textContent = q.q; qCat.textContent = q.cat;
+      qProg.textContent = `Pregunta ${currentQ+1} de ${questions.length}`;
+      pBar.style.width = `${((currentQ+1)/questions.length)*100}%`;
+      optsBox.innerHTML = '';
+      q.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.textContent = opt.t;
+        btn.onclick = () => selectOpt(opt.p, btn);
+        optsBox.appendChild(btn);
+      });
+      prevBtn.style.display = currentQ===0 ? 'none' : 'inline-block';
+      nextBtn.style.display = 'inline-block'; finBtn.style.display = 'none';
+    }
+
+    function selectOpt(points, el) {
+      userAns[currentQ] = points;
+      document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      if(currentQ===questions.length-1) { nextBtn.style.display='none'; finBtn.style.display='inline-block'; }
+    }
+
+    prevBtn.addEventListener('click', () => { if(currentQ>0) { currentQ--; loadQ(); } });
+    nextBtn.addEventListener('click', () => { if(currentQ<questions.length-1 && userAns[currentQ]!==undefined) { currentQ++; loadQ(); } });
+    finBtn.addEventListener('click', calcRes);
+
+    function calcRes() {
+      const score = userAns.reduce((a,b)=>a+(b||0),0);
+      qEl.style.display='none'; rEl.style.display='block';
+      let lvl, col, icon, title, desc, recs;
+      
+      if(score<=30) { lvl="BAJO"; col="var(--accent)"; icon="🟢"; title="¡Buenas prácticas detectadas!"; desc="Tu empresa tiene una base sólida. Mantén la vigilancia ante reformas."; recs="<strong>✅ Siguiente paso:</strong> Auditorías preventivas semestrales."; }
+      else if(score<=60) { lvl="MEDIO"; col="var(--warning)"; icon="🟡"; title="Riesgos moderados detectados"; desc="Áreas de oportunidad que podrían generar multas. Prevenir es 10x más barato."; recs="<strong>⚠️ Focos:</strong><ul style='margin:0.5rem 0 0 1.2rem'>"+questions.filter((_,i)=>userAns[i]>=5).map((_,i)=>`<li>${questions[i].cat}</li>`).join('')+"</ul>"; }
+      else { lvl="ALTO"; col="var(--danger)"; icon="🔴"; title="⚠️ Riesgo Alto"; desc="Vulnerabilidades significativas. Riesgo de sanciones, clausuras o responsabilidad penal."; recs="<strong>🚨 Crítico:</strong><ul style='margin:0.5rem 0 0 1.2rem'>"+questions.filter((_,i)=>userAns[i]>=7).map((_,i)=>`<li>${questions[i].cat}</li>`).join('')+"</ul>"; }
+
+      document.getElementById('result-icon').textContent=icon;
+      document.getElementById('result-title').textContent=title; document.getElementById('result-title').style.color=col;
+      document.getElementById('result-score').textContent=`Puntaje: ${score}/100 • Riesgo ${lvl}`; document.getElementById('result-score').style.color=col;
+      document.getElementById('result-description').textContent=desc;
+      document.getElementById('result-recommendations').innerHTML=recs;
+      document.getElementById('result-recommendations').className=`result-box result-${lvl.toLowerCase()}`;
+    }
+
+    document.getElementById('restart-quiz').addEventListener('click', () => { currentQ=0; userAns=[]; rEl.style.display='none'; startEl.style.display='block'; });
+
+    document.getElementById('email-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button');
+      btn.textContent = '⏳ Generando...'; btn.disabled = true;
+
+      const name = document.getElementById('lead-name').value.trim();
+      const email = document.getElementById('lead-email').value.trim();
+      const company = document.getElementById('lead-company').value.trim() || 'No especificada';
+      const score = userAns.reduce((a,b)=>a+(b||0),0);
+      const riskLevel = score<=30?'BAJO':score<=60?'MEDIO':'ALTO';
+      const date = new Date().toLocaleDateString('es-MX', { year:'numeric', month:'long', day:'numeric' });
+
+      const weakAreas = questions.filter((_,i) => userAns[i] >= 5).map((_,i) => {
+        const cat = questions[i].cat;
+        const action = userAns[i] >= 7 ? 'Requiere atención inmediata.' : 'Revisar políticas.';
+        return `<li><strong>${cat}:</strong> ${action}</li>`;
+      }).join('');
+
+      const reportHTML = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Diagnóstico Compliance - MYA</title>
+      <style>body{font-family:system-ui,sans-serif;line-height:1.6;color:#0f172a;max-width:700px;margin:0 auto;padding:2.5rem 1.5rem;}
+      h1{color:#0c4a6e;border-bottom:2px solid #0ea5e9;padding-bottom:0.5rem;}
+      .score{font-size:1.6rem;font-weight:700;color:${riskLevel==='BAJO'?'#22c55e':riskLevel==='MEDIO'?'#f59e0b':'#ef4444'};margin:1rem 0;}
+      .box{background:#f8fafc;padding:1.2rem;border-radius:8px;margin:1.5rem 0;border-left:4px solid #0ea5e9;}
+      ul{margin:0.5rem 0 0 1.2rem;}
+      .footer{margin-top:2.5rem;font-size:0.8rem;color:#64748b;border-top:1px solid #e2e8f0;padding-top:1rem;text-align:center;}</style></head><body>
+      <h1>📊 Reporte de Compliance</h1>
+      <p><strong>Fecha:</strong> ${date}<br><strong>Empresa:</strong> ${company}<br><strong>Contacto:</strong> ${name} (${email})</p>
+      <div class="box"><p class="score">Puntaje: ${score}/100 | Riesgo: ${riskLevel}</p></div>
+      <h2>🔍 Áreas a Revisar:</h2>
+      <ul>${weakAreas || '<li>Base sólida. Mantén auditorías preventivas.</li>'}</ul>
+      <div class="box"><strong>💡 Recomendación:</strong> Agendar asesoría gratuita.<br>📧 <a href="mailto:beatriz.maya@myaconsultoresfiscales.com">beatriz.maya@myaconsultoresfiscales.com</a> | 📱 <a href="https://wa.me/5215579441612?text=Hola%2C%20necesito%20asesor%C3%ADa%20de%20compliance." target="_blank">+52 55 5437 3876</a></div>
+      <div class="footer">© 2026 MYA Consultores • Ctrl+P → Guardar como PDF</div>
+      </body></html>`;
+
+      const blob = new Blob([reportHTML], {type: 'text/html;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Diagnostico_Compliance_${name.replace(/\s+/g,'_')}.html`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      this.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
